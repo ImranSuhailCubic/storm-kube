@@ -46,12 +46,42 @@ kubectl apply -f https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version
 ```shell
 kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
+### Start storm cluster
 ```shell
 cd /vagrant
 cd storm-kube/
 ./setup.sh
 ```
 Wait for 6-10 minutes for setup.sh to finish creating services and pods
+
+You will see output similar to this:
+```shell
+NAME                                READY   STATUS              RESTARTS   AGE
+pod/nimbus                          1/1     Running             0          3m1s
+pod/storm-ui                        1/1     Running             0          61s
+pod/storm-worker-controller-f4d7n   0/1     ContainerCreating   0          30s
+pod/zookeeper                       1/1     Running             0          5m2s
+
+NAME                           TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                               AGE
+service/kubernetes             ClusterIP      10.96.0.1        <none>        443/TCP                               58m
+service/nimbus                 ClusterIP      10.109.2.46      <none>        6627/TCP                              61s
+service/storm-ui               LoadBalancer   10.100.24.102    <pending>     8080:31007/TCP                        30s
+service/storm-worker-service   ClusterIP      10.108.121.47    <none>        6700/TCP,6701/TCP,6702/TCP,6703/TCP   0s
+service/zookeeper              ClusterIP      10.104.192.204   <none>        2181/TCP                              3m1s
+
+NAME                                            DESIRED   CURRENT   READY   AGE
+replicationcontroller/storm-worker-controller   1         1         0       30s
+```
+
+Get the port shown after 8080 for service/storm-ui in the output above. 
+Get IP for the Vagrant VM and from our host os broswer access storm-ui with http://vagrant-vm-ip:storm-ui-port
+
+Example: http://172.28.128.4:31007
+
+
+
+# Manual setup for storm cluster
+(If  you didn't use setup.sh)
 
 
 ## Step One: Start your ZooKeeper service
