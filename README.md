@@ -28,6 +28,32 @@ tool somewhere in your path. Please see the [getting
 started](../../docs/getting-started-guides) for installation
 instructions for your platform.
 
+## Setup k8s cluster in a Vagrant VM
+If you have VirtualBox and Vagrant installed, get the Vagrantfile from: 
+
+https://gist.github.com/ImranSuhailCubic/2866342487688b8361101bbf0e0f671f 
+
+Save it in a new directory for the VM (/vagrantdir)
+
+Go to /vagrantdir and run "vagrant up"
+
+SSH into the VM with "vagrant ssh"
+
+Run the next two commands:
+```shell
+kubectl apply -f https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')
+```
+```shell
+kubectl taint nodes --all node-role.kubernetes.io/master-
+```
+```shell
+cd /vagrant
+cd storm-kube/
+./setup.sh
+```
+Wait for 6-10 minutes for setup.sh to finish creating services and pods
+
+
 ## Step One: Start your ZooKeeper service
 
 ZooKeeper is a distributed coordination service that Storm uses as a
