@@ -16,17 +16,14 @@ section.
 
 ### Sources
 
-Source is freely available at:
-* Docker image - https://github.com/mattf/docker-storm
-* Docker Trusted Build - https://registry.hub.docker.com/search?q=mattf/storm
+Storm source is freely available at:
+* Docker image - https://hub.docker.com/_/storm/
 
 ## Step Zero: Prerequisites
 
 This example assumes you have a Kubernetes cluster installed and
 running, and that you have installed the ```kubectl``` command line
-tool somewhere in your path. Please see the [getting
-started](../../docs/getting-started-guides) for installation
-instructions for your platform.
+tool somewhere in your path. See next section on how to get a functioning cluster with Vagrant
 
 ## Setup k8s cluster in a Vagrant VM
 If you have VirtualBox and Vagrant installed, get the Vagrantfile from: 
@@ -39,7 +36,7 @@ Go to /vagrantdir and run "vagrant up"
 
 SSH into the VM with "vagrant ssh"
 
-Run the next two commands:
+Run the next two commands to start weave net and to untaint the nodes:
 ```shell
 kubectl apply -f https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')
 ```
@@ -73,11 +70,11 @@ NAME                                            DESIRED   CURRENT   READY   AGE
 replicationcontroller/storm-worker-controller   1         1         0       30s
 ```
 
-Get the port shown after 8080 for service/storm-ui in the output above. 
-Get IP for the Vagrant VM and from our host os broswer access storm-ui with http://vagrant-vm-ip:storm-ui-port
-
+The UI service for Storm will listen on port 30001. 
+Get IP for the Vagrant VM and from our host os broswer access storm-ui with http://vagrant-vm-ip:30001
 Example: http://172.28.128.4:31007
 
+To change the port for storm ui, edit storm-ui-service.json and change the port under "nodePort"
 
 
 # Manual setup for storm cluster
