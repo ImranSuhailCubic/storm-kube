@@ -1,3 +1,4 @@
+#!/bin/bash
 kubectl delete -f zookeeper.json
 
 kubectl delete -f zookeeper-service.json

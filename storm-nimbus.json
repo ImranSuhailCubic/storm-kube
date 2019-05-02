@@ -10,21 +10,22 @@
   "spec": {
     "volumes": [
       {
-        "name": "topologies", 
+        "name": "topologies",
         "hostPath": {
-          "path": "/home/spinnakr/data"
+          "path": "/home/vagrant/data/topologies"
         }
       }
     ],
-    "containers": [ 
+    "containers": [
       {
-        "name": "nimbus", 
-        "image": "mattf/storm-nimbus", 
+        "name": "nimbus",
+        "image": "storm",
+        "args": ["storm", "nimbus"],
         "ports": [
           {
-            "containerPort": 6627 
+            "containerPort": 6627
           }
-        ], 
+        ],
         "resources": {
           "limits": {
             "cpu": "100m"

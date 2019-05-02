@@ -12,6 +12,7 @@
       {
         "port": 8080,
         "targetPort": "storm-ui-http",
+        "nodePort": 30001,
         "protocol": "TCP"
       }
     ],

@@ -11,7 +11,8 @@
     "containers": [
       {
         "name": "storm-ui",
-        "image": "mattf/storm-ui",
+        "image": "storm",
+        "args": ["storm", "ui"],
         "ports": [
           {
             "name": "storm-ui-http",

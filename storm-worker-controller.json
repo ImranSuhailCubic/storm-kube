@@ -23,7 +23,8 @@
         "containers": [
           {
             "name": "storm-worker",
-            "image": "mattf/storm-worker",
+            "image": "storm",
+            "args": ["storm", "supervisor"],
             "ports": [
               {
                 "name": "p6700",
