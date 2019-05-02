@@ -1,0 +1,30 @@
+
+- include_role:
+    name:  k8s-docker
+
+- name: Create Zookeeper pod
+  shell: kubectl create -f zookeeper.json
+
+- name: Create Zoookeeper service
+  shell: kubectl create -f zookeeper-service.json
+ 
+- name: Create Nimbus pod (Nimbus is the cluster controller)
+  shell: kubectl create -f storm-nimbus.json
+
+- name: Create Nimbus service
+  shell: kubectl create -f storm-nimbus-service.json
+
+- name: Create Storm UI pod (To check storm cluster status from browser)
+  shell: kubectl create -f storm-ui.json
+
+- name: Create Storm UI Service 
+  shell: kubectl create -f storm-ui-service.json
+
+- name: Create Worker/supervisor pod
+  shell: kubectl create -f storm-worker-controller.json
+
+- name: Create Worker/supervisor service
+  shell: kubectl create -f storm-worker-service.json
+
+- name: Check pods, services and replication controller status
+  shell: kubectl get pods,services,rc
